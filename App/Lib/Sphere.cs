@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using com.moosemorals.DWP.Models;
 
-using com.moosemorals.DWP.Models;
+using System;
+using System.Diagnostics;
 
 namespace com.moosemorals.DWP.Lib
 {
@@ -49,9 +45,14 @@ namespace com.moosemorals.DWP.Lib
         /// </summary>
         /// <param name="t">Angle in radians</param>
         /// <returns></returns>
-        private static double Haversine(double t) => (1 - Math.Cos(t)) / 2;
+        private static double Haversine(double t)
+        {
+            return (1 - Math.Cos(t)) / 2;
+        }
 
-        private static double ToRadians(double t) => Math.PI * t / 180;
-
+        private static double ToRadians(double t)
+        {
+            return Math.PI * t / 180;
+        }
     }
 }

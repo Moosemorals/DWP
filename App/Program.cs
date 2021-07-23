@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace com.moosemorals.DWP
@@ -22,7 +21,7 @@ namespace com.moosemorals.DWP
         private static readonly Point London = new(51.509865, -0.118092); // From https://www.latlong.net/place/london-the-uk-14153.html
 
         public static async Task Main(string[] args)
-        { 
+        {
             IEnumerable<User> users = await FetchUsersAsync("London", London, 50);
 
             string json = JsonConvert.SerializeObject(users.OrderBy(u => u.Id), Formatting.Indented);
@@ -46,7 +45,7 @@ namespace com.moosemorals.DWP
             // Combine lists
             return usersByCity.Concat(usersByDistance)
                     // Remove duplicates
-                    .Distinct(); 
+                    .Distinct();
         }
 
     }

@@ -38,7 +38,6 @@ namespace UnitTests
         [Test]
         public async Task Fetch_City()
         {
-            
             // Arrange
             string targetCity = "Town";
 
@@ -65,10 +64,10 @@ namespace UnitTests
         }
 
 
-        private static readonly List<User> users = new List<User>() { 
+        private static readonly List<User> users = new List<User>() {
             new User(1, "John", "Random", "randomJ@example.com", "127.0.0.2", 0, 0, "City"),
-            new User(1, "Joan", "Random", "joan.random@example.com", "127.0.0.4", 0, 0, "Town"), 
-        }; 
+            new User(1, "Joan", "Random", "joan.random@example.com", "127.0.0.4", 0, 0, "Town"),
+        };
 
         private HttpClient GetHttpClient(string body)
         {
@@ -95,7 +94,7 @@ namespace UnitTests
                     Content = new StringContent(body, Encoding.UTF8, "application/json"),
                 };
 
-                return Task.FromResult( responseMessage);
+                return Task.FromResult(responseMessage);
             }
         }
 

@@ -1,14 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using com.moosemorals.DWP.Lib;
 using com.moosemorals.DWP.Models;
 
 using NUnit.Framework;
 
-namespace Unit_Tests {
-    public class SphereTests {
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Unit_Tests
+{
+    public class SphereTests
+    {
 
         // X = Longitude
         // Y = Latitude
@@ -16,7 +18,8 @@ namespace Unit_Tests {
         private const double _radiusEarth = 3958; // miles
 
         [TestCaseSource(nameof(UnitSphereTestCases))]
-        public void UnitSphereTests(double lat, double lon, double expected, string description) {
+        public void UnitSphereTests(double lat, double lon, double expected, string description)
+        {
 
             double _delta = 1e-8; // Should be at least as accurate as the user data
 
@@ -42,7 +45,8 @@ namespace Unit_Tests {
 
         // Use data from the real world to check our maths
         [TestCaseSource(typeof(EarthDataTestCases))]
-        public void EarthDataSphereTests(Point from, Point to, double expected, string description) {
+        public void EarthDataSphereTests(Point from, Point to, double expected, string description)
+        {
 
             double _delta = _radiusEarth * 0.01; // Our data here is a bit sloppy, so anything within 1% is fine
 
@@ -52,10 +56,13 @@ namespace Unit_Tests {
         }
 
         // Build up a set of test cases from the data below
-        public class EarthDataTestCases : IEnumerable {
-            public IEnumerator GetEnumerator() {
+        public class EarthDataTestCases : IEnumerable
+        {
+            public IEnumerator GetEnumerator()
+            {
 
-                foreach (CityPair p in _cityPairs) {
+                foreach (CityPair p in _cityPairs)
+                {
 
                     Point from = _cities[p.From];
                     Point to = _cities[p.To];
@@ -66,9 +73,10 @@ namespace Unit_Tests {
                 }
             }
         }
- 
+
         // A selection of cities, with at least one each North/South and East/West
-        public static readonly Dictionary<string, Point> _cities = new() {
+        public static readonly Dictionary<string, Point> _cities = new()
+        {
             { "Tokyo", new(35.6897, 139.6922) },
             { "Shanghai", new(31.2286, 121.4747) },
             { "São Paulo", new(-23.55, -46.6333) },
@@ -81,7 +89,8 @@ namespace Unit_Tests {
 
         // Actual distance between pairs of cities
         // Data from https://www.distancefromto.net/
-        public static readonly List<CityPair> _cityPairs = new() {
+        public static readonly List<CityPair> _cityPairs = new()
+        {
             new("Tokyo", "Shanghai", 1098),
             new("Tokyo", "São Paulo", 11515),
             new("Tokyo", "Lagos", 8376),

@@ -4,9 +4,7 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace com.moosemorals.DWP.Lib
@@ -37,10 +35,10 @@ namespace com.moosemorals.DWP.Lib
         /// <param name="city"></param>
         /// <returns>A list of users</returns>
         public async Task<List<User>> GetUsersInCityAsync(string city)
-        { 
-            return await ParseResponse(await httpClient.GetAsync(BuildUri($"/city/{city}/users"))); 
+        {
+            return await ParseResponse(await httpClient.GetAsync(BuildUri($"/city/{city}/users")));
         }
- 
+
         /// <summary>
         /// Parse the API response from JSON to a list of users
         /// </summary>
@@ -54,9 +52,9 @@ namespace com.moosemorals.DWP.Lib
                 return JsonConvert.DeserializeObject<List<User>>(json) ?? throw new JsonException("Unexpected response");
             }
 
-            throw new Exception($"Network Error: {response.StatusCode} {response.ReasonPhrase}"); 
+            throw new Exception($"Network Error: {response.StatusCode} {response.ReasonPhrase}");
         }
- 
+
         public Uri BuildUri(string path)
         {
             return new UriBuilder(apiBase)
