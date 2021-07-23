@@ -72,5 +72,11 @@ namespace com.moosemorals.DWP.Models
         {
             return HashCode.Combine(Id, FirstName, LastName, Email, IPAddress, Latitude, Longitude, City);
         }
+
+        public override string? ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
+
 }
