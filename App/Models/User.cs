@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace com.moosemorals.DWP.Models
 {
-    public class User : IPoint
+    public class User : IPoint, IEquatable<User?>
     {
         public User(int id, string firstName, string lastName, string email, string iPAddress, double latitude, double longitude, string city)
         {
@@ -49,5 +49,28 @@ namespace com.moosemorals.DWP.Models
 
         [JsonProperty("city")]
         public string City { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as User);
+        }
+
+        public bool Equals(User? other)
+        {
+            return other != null &&
+                   Id == other.Id &&
+                   FirstName == other.FirstName &&
+                   LastName == other.LastName &&
+                   Email == other.Email &&
+                   IPAddress == other.IPAddress &&
+                   Latitude == other.Latitude &&
+                   Longitude == other.Longitude &&
+                   City == other.City;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, FirstName, LastName, Email, IPAddress, Latitude, Longitude, City);
+        }
     }
 }
