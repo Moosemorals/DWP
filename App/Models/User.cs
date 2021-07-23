@@ -47,7 +47,7 @@ namespace com.moosemorals.DWP.Models
         [JsonProperty("longitude")]
         public double Longitude { get; set; }
 
-        [JsonProperty("city")]
+        [JsonIgnore]
         public string City { get; set; }
 
         public override bool Equals(object? obj)
