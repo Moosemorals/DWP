@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Unit_Tests
+namespace UnitTests
 {
     public class SphereTests
     {
