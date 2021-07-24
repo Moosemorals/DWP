@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace com.moosemorals.DWP.Lib
     {
         private readonly string apiBase;
         private readonly HttpClient httpClient;
+        public const double EarthRadius = 3958; // miles
 
         public Fetcher(string ApiBase, HttpClient HttpClient)
         {
@@ -20,6 +22,21 @@ namespace com.moosemorals.DWP.Lib
             httpClient = HttpClient;
         }
 
+        public async Task<IEnumerable<User>> FetchUsersAsync(string City, Point Center, double Radius)
+        {
+            // Fetch all users
+            IEnumerable<User> usersByDistance = (await GetAllUsersAsync())
+                // Within 50 miles of London
+                .Where(u => Sphere.Distance(EarthRadius, Center, u) < Radius);
+
+            // Fetch users from London
+            IEnumerable<User> usersByCity = await GetUsersInCityAsync(City);
+
+            // Combine lists
+            return usersByCity.Concat(usersByDistance)
+                    // Remove duplicates
+                    .Distinct();
+        }
         /// <summary>
         /// Hit the '/users' endpoint to get all users
         /// </summary>
