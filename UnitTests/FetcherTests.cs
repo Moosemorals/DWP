@@ -25,6 +25,7 @@ namespace UnitTests
         {
             // Arrange
             string body = JsonConvert.SerializeObject(users);
+            List<User> expected = JsonConvert.DeserializeObject<List<User>>(body);
             Fetcher f = new Fetcher(apiBase, GetHttpClient(body));
 
             // Act
@@ -32,7 +33,7 @@ namespace UnitTests
 
             // Assert
             Assert.IsNotNull(actual);
-            Assert.AreEqual(users, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -41,8 +42,10 @@ namespace UnitTests
             // Arrange
             string targetCity = "Town";
 
-            List<User> expected = users.Where(u => u.City == targetCity).ToList();
-            string body = JsonConvert.SerializeObject(expected);
+            List<User> u = users.Where(u => u.City == targetCity).ToList();
+            string body = JsonConvert.SerializeObject(u);
+            List<User> expected = JsonConvert.DeserializeObject<List<User>>(body);
+
             Fetcher f = new Fetcher(apiBase, GetHttpClient(body));
 
             // Act
